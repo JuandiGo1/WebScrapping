@@ -22,7 +22,8 @@ public class WebScrapping {
     /**
      * @param args the command line arguments
      */
-    static Arbol arbol = new Arbol();
+    
+    public static Arbol arbol = new Arbol();
 
     public static void main(String[] args) {
 
@@ -32,34 +33,37 @@ public class WebScrapping {
             Document doc = con.get();
 //            Elements el = doc.getAllElements();
 
-            scrap(doc.getElementsByTag("html").get(0), "", null);
+            scrap(doc.getElementsByTag("html").get(0), "", null, 0);
 //Element html = scrap(doc.getElementsByTag("html").get(0));
-            System.out.println("PreOrden: ");
-            arbol.PreOrden(arbol.getRaiz());
+//            System.out.println("PreOrden: ");
+//            arbol.PreOrden(arbol.getRaiz());
+            //System.out.println(arbol.altur(arbol.getRaiz()));
+            //System.out.println(arbol.nodosPorLevel(arbol.getRaiz(),1, 0));
         } catch (IOException ex) {
             Logger.getLogger(WebScrapping.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public static void scrap(Element et, String esp, String padre) {
-
+    public static void scrap(Element et, String esp, String padre, int level) {
+        
         if (et == null) {
             esp = "";
             return;
         } else {
-            //System.out.println(esp + et.nodeName() + ": " + et.childrenSize());
-
-            arbol.insertNodo(et.nodeName(), padre);
-
+            System.out.println(esp + et.nodeName() + ": " + et.childrenSize()+" nivel: "+ level);
+            
+            arbol.insertNodo(et.nodeName(), padre, level);
+        
         }
         String esp1 = esp;
         if (et.childrenSize() > 0) {
+            
             esp1 = esp;
             esp = esp + "-";
-            scrap(et.firstElementChild(), esp, et.nodeName());
+            scrap(et.firstElementChild(), esp, et.nodeName(), level+1);
         }
-        scrap(et.nextElementSibling(), esp1, padre);
+        scrap(et.nextElementSibling(), esp1, padre, level);
     }
 
 }
