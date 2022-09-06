@@ -11,6 +11,7 @@ package webscrapping;
 public class Arbol {
 
     private Nodo raiz;
+    private int altura;
 
     public Arbol() {
         this.raiz = null;
@@ -47,17 +48,17 @@ public class Arbol {
         return resultado;
     }
 
-    public void insertNodo(String nombre, String padre) {
+    public void insertNodo(String nombre, String padre, int level) {
         if (getRaiz() == null) {
             System.out.println("Insertando nodo raiz" + "  --->  " + nombre);
-            this.raiz = new Nodo(nombre);
+            this.raiz = new Nodo(nombre, level);
         } else {
             Nodo nodoPadre = BusquedaRecursiva(padre);
 //            System.out.println("Nodo Padre " + nodoPadre.getNombre());
             if (nodoPadre != null) {
-                nodoPadre.addHijo(new Nodo(nombre));
+                nodoPadre.addHijo(new Nodo(nombre,level));
             } else {
-                raiz.getHijos().add(new Nodo(nombre));
+                raiz.getHijos().add(new Nodo(nombre, level));
             }
             System.out.println("Nodo insertado: " + nombre + "  ---> " + " Nodo Padre " + nodoPadre.getNombre());
         }
@@ -95,4 +96,31 @@ public class Arbol {
             System.out.print(nodo.getNombre() + ", ");
         }
     }
+    
+    public int altur(Nodo raiz){
+        int ht =0;
+        for(Nodo child: raiz.getHijos()){
+            int ch = altur(child);
+            ht = Math.max(ch, ht);
+        }
+        ht+=1;
+        return ht;
+    }
+    
+    public int nodosPorLevel(Nodo nodo, int nivel, int cant){
+        if (nodo == null) {
+            return cant;
+        }
+        for (Nodo temp : nodo.getHijos()) {
+            if(temp.darNivel()==nivel){
+                nodosPorLevel(temp, nivel, cant+1);
+            }else{
+                nodosPorLevel(temp, nivel, cant);
+            }
+            
+        }
+        return cant;
+
+    }
+ 
 }
