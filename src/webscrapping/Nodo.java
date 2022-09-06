@@ -14,10 +14,17 @@ import java.util.List;
 public class Nodo {
     private String nombre;
     private List<Nodo> hijos = new ArrayList<>();
+    private int Nivel ;
 
-    public Nodo (String nombre){
+    public Nodo (String nombre, int level){
         this.nombre = nombre;
+        this.Nivel = level;
     }
+    
+    public int darNivel (){
+        return this.Nivel;
+    }
+    
     
     public String getNombre() {
         return nombre;
