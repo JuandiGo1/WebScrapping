@@ -12,6 +12,7 @@ public class Arbol {
 
     private Nodo raiz;
     private int altura;
+    int nodoxNivel;
 
     public Arbol() {
         this.raiz = null;
@@ -48,17 +49,17 @@ public class Arbol {
         return resultado;
     }
 
-    public void insertNodo(String nombre, String padre, int level) {
+    public void insertNodo(String nombre, String padre, int level, int hijos) {
         if (getRaiz() == null) {
             System.out.println("Insertando nodo raiz" + "  --->  " + nombre);
-            this.raiz = new Nodo(nombre, level);
+            this.raiz = new Nodo(nombre, level, hijos);
         } else {
             Nodo nodoPadre = BusquedaRecursiva(padre);
 //            System.out.println("Nodo Padre " + nodoPadre.getNombre());
             if (nodoPadre != null) {
-                nodoPadre.addHijo(new Nodo(nombre,level));
+                nodoPadre.addHijo(new Nodo(nombre,level, hijos));
             } else {
-                raiz.getHijos().add(new Nodo(nombre, level));
+                raiz.getHijos().add(new Nodo(nombre, level,hijos));
             }
             System.out.println("Nodo insertado: " + nombre + "  ---> " + " Nodo Padre " + nodoPadre.getNombre());
         }

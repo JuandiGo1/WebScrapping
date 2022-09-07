@@ -6,6 +6,8 @@ package webscrapping;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,17 +18,19 @@ public class visual extends javax.swing.JFrame {
     /**
      * Creates new form visual
      */
+    public static Arbol arbol = new Arbol();
+    Arbol ar;
+
     public visual() {
 
         initComponents();
         int x = panel.getWidth();
         int y = panel.getHeight();
         int esp;
+
     }
     int esp = 0;
-    public static Arbol arbol = new Arbol();
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,7 +41,7 @@ public class visual extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         link = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
@@ -51,19 +55,29 @@ public class visual extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Link");
+        jLabel2.setText("Link:");
 
         panel.setBackground(new java.awt.Color(204, 204, 204));
+        panel.setPreferredSize(new java.awt.Dimension(5000, 5000));
+        panel.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                panelAncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 5000, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panel);
@@ -73,54 +87,61 @@ public class visual extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String enlace= link.getText();
-        //Scrapping sc = new Scrapping(enlace);
-        //Arbol ar = Scrapping.arbol;
+
+        String enlace = link.getText();
+        Scrapping sc = new Scrapping(enlace);
+        ar = Scrapping.arbol;
         Graphics g = panel.getGraphics();
-        //draw(ar.getRaiz(),g, 30, panel.getWidth()/2, panel.getWidth()/5);
+        draw(ar.getRaiz(), g, ar);
         //g.drawLine(0, 0, 100, 100);
         //g.setColor(Color.red);
-        g.drawOval(panel.getWidth()/2, 10, 40, 40);
-        g.drawOval(panel.getWidth()/4, 70, 40, 40);
-        g.drawOval(panel.getWidth()/3, 70, 40, 40);
-        g.drawOval(panel.getWidth()/2, 70, 40, 40);
 
         //g.fillOval(50, 50, 20, 20);
         //g.drawString("HTML", 200 - 6, 200 + 4);
-
         // Crear el arbol (obtener el arbol del crawller)
         // pasarlo al metodo
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void panelAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_panelAncestorMoved
+
+        Graphics g = panel.getGraphics();
+        if (ar != null) {
+            draw(ar.getRaiz(), g, ar);
+
+        }
+
+
+    }//GEN-LAST:event_panelAncestorMoved
 
     /**
      * @param args the command line arguments
@@ -159,27 +180,44 @@ public class visual extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField link;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
 
-    public void draw(Nodo raiz, Graphics g, int y, int x, int espacioH) {
+    public void draw(Nodo raiz, Graphics g, Arbol ar) {
+        int y = 5;
+        Cola ls = new Cola();
+        ls.insertar(raiz);
+        Nodo p;
+        for (int i = 0; i < ar.altur(ar.getRaiz()) - 1; i++) {
+            int n = ar.verNxL(raiz, i);
+            //System.out.println("Nodos en nivel "+i+": "+n);
+
+            int con = 1;
+
+            for (int j = 0; j < n; j++) {
+
+                p = ls.extraer();
+                List<Nodo> hijos = p.getHijos();
+                for (Nodo hj : hijos) {
+                    ls.insertar(hj);
+                    System.out.println(hj.getNombre());
+                }
+                g.drawOval(con * (panel.getWidth() / (n + 1)), y, 40, 50);
+                g.drawString(p.getNombre(), con * (panel.getWidth() / (n + 1)) + 10, y);
+
+                con++;
+            }
+
+            y += 70;
+        }
         //int x = panel.getWidth()/2;
         //int espacioH = panel.getWidth()/5;
-        
-        g.drawOval(x-15,y-15,2*15,2*15);
-        
-        if (raiz.getHijos() != null) {
-            for (Nodo e: raiz.getHijos()){
-                draw(e,g, x-espacioH, y+50, espacioH);
-                System.out.println("IMPRIMIO");
-            }
-        }
         //int esp = contarespacios(p.hijos);
         // imprimir p en la mitad del esp
-        
+
     }
 
 }

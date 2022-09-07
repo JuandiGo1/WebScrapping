@@ -52,7 +52,7 @@ public class WebScrapping {
         } else {
             //System.out.println(esp + et.nodeName() + ": " + et.childrenSize()+" nivel: "+ level);
             
-            arbol.insertNodo(et.nodeName(), padre, level);
+            arbol.insertNodo(et.nodeName(), padre, level, et.childrenSize());
         
         }
         String esp1 = esp;
