@@ -17,9 +17,16 @@ public class visual extends javax.swing.JFrame {
      * Creates new form visual
      */
     public visual() {
-        initComponents();
-    }
 
+        initComponents();
+        int x = panel.getWidth();
+        int y = panel.getHeight();
+        int esp;
+    }
+    int esp = 0;
+    public static Arbol arbol = new Arbol();
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,10 +36,22 @@ public class visual extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        link = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("Dibujar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Link");
 
         panel.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -47,49 +66,60 @@ public class visual extends javax.swing.JFrame {
             .addGap(0, 574, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Dibujar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(panel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(link, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String enlace= link.getText();
+        //Scrapping sc = new Scrapping(enlace);
+        //Arbol ar = Scrapping.arbol;
         Graphics g = panel.getGraphics();
+        //draw(ar.getRaiz(),g, 30, panel.getWidth()/2, panel.getWidth()/5);
         //g.drawLine(0, 0, 100, 100);
-        g.setColor(Color.red);
-        g.drawOval(382, 10, 40, 40);
-        
-        //g.fillOval(50, 50, 20, 20);
-        g.drawString("HTML", 200-6, 200+4);
+        //g.setColor(Color.red);
+        g.drawOval(panel.getWidth()/2, 10, 40, 40);
+        g.drawOval(panel.getWidth()/4, 70, 40, 40);
+        g.drawOval(panel.getWidth()/3, 70, 40, 40);
+        g.drawOval(panel.getWidth()/2, 70, 40, 40);
 
+        //g.fillOval(50, 50, 20, 20);
+        //g.drawString("HTML", 200 - 6, 200 + 4);
+
+        // Crear el arbol (obtener el arbol del crawller)
+        // pasarlo al metodo
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -129,6 +159,27 @@ public class visual extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField link;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
+
+    public void draw(Nodo raiz, Graphics g, int y, int x, int espacioH) {
+        //int x = panel.getWidth()/2;
+        //int espacioH = panel.getWidth()/5;
+        
+        g.drawOval(x-15,y-15,2*15,2*15);
+        
+        if (raiz.getHijos() != null) {
+            for (Nodo e: raiz.getHijos()){
+                draw(e,g, x-espacioH, y+50, espacioH);
+                System.out.println("IMPRIMIO");
+            }
+        }
+        //int esp = contarespacios(p.hijos);
+        // imprimir p en la mitad del esp
+        
+    }
+
 }
