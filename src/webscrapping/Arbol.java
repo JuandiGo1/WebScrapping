@@ -107,20 +107,19 @@ public class Arbol {
         return ht;
     }
     
-    public int nodosPorLevel(Nodo nodo, int nivel, int cant){
-        if (nodo == null) {
-            return cant;
+    public void nodosPorLevel(Nodo nodo, int nivel){
+        if (nivel== nodo.darNivel()){
+            nodoxNivel++;
         }
-        for (Nodo temp : nodo.getHijos()) {
-            if(temp.darNivel()==nivel){
-                nodosPorLevel(temp, nivel, cant+1);
-            }else{
-                nodosPorLevel(temp, nivel, cant);
-            }
-            
+        for(Nodo temp: nodo.getHijos()){
+            nodosPorLevel(temp, nivel);
         }
-        return cant;
-
+    }
+    
+    public int verNxL(Nodo raiz, int nivel){
+        nodoxNivel=0;
+        nodosPorLevel(raiz, nivel);
+        return nodoxNivel;
     }
  
 }
