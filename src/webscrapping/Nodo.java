@@ -13,14 +13,19 @@ import java.util.List;
  */
 public class Nodo {
     private String nombre;
+    int id;
     private List<Nodo> hijos = new ArrayList<>();
     private int nHijos;
     private int Nivel ;
+    Nodo padre;
+    int coorX, coorY;
 
-    public Nodo (String nombre, int level, int hijos){
+    public Nodo (String nombre, int level, int hijos, int id){
         this.nombre = nombre;
         this.Nivel = level;
         this.nHijos=hijos;
+        this.id=id;
+        
     }
     
     
