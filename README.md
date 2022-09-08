@@ -1,8 +1,8 @@
 # WebScrapping
 Lab Estructura de datos 2
 
-% INTEGRANTES:
---Juan Maestre
+INTEGRANTES:
+-Juan Maestre
 - Mateo Valencia
 - Gabriela Moreno
 
